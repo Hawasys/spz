@@ -1,5 +1,5 @@
 CXX      := -g++
-CXXFLAGS := -Wall -Wextra -std=c++17 -m64 -I include
+CXXFLAGS := -Wall -Wextra -std=c++17 -m64
 LDLIBS   := -lSDL2main -lSDL2 -lSDL2_image
 
 BUILD    := ./build
@@ -39,6 +39,11 @@ release: all
 clean:
 	-@rm -rf $(BUILD)/*
 	-@rm -rf $(TARGET)
+
+git: 
+	@git add ./
+	@git commit -m "$m"
+	@git push -u origin main
 info:
 	@echo "[*] Application dir: ${APP_DIR}     "
 	@echo "[*] Object dir:      ${OBJ_DIR}     "
