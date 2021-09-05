@@ -1,5 +1,5 @@
 CXX      := -g++
-CXXFLAGS := -Wall -Wextra -std=c++17 -m64
+CXXFLAGS := -Wall -Wextra -std=c++20 -m64
 LDLIBS   := -lSDL2main -lSDL2 -lSDL2_image
 
 BUILD    := build
@@ -26,24 +26,23 @@ $(APP_DIR)/$(TARGET): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $(APP_DIR)/$(TARGET) $^ $(LDLIBS)
 
 
-.PHONY:build
-build:
-	-@mkdir -p $(APP_DIR)
-	-@mkdir -p $(OBJ_DIR)
-
 debug: CXXFLAGS += -DDEBUG -g
 debug: all
 
 release: CXXFLAGS += -O2
 release: all
 
+.PHONY:build
+build:
+	-@mkdir -p {$(APP_DIR),$(OBJ_DIR)}
+
+
 .PHONY:clean
 clean:
-	-@rm -rf $(BUILD)/*
-	-@rm -rf $(TARGET)
+	-@rm -rf {$(BUILD),$(TARGET)}
 
 .PHONY:git
-git: 
+git: clean 
 	@git add ./
 	@git commit -m "$m"
 	@git push -u origin main
